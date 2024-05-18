@@ -4,9 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json" />
   <title>Platformer</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
-  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
   <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
 </head>
 
@@ -17,11 +19,6 @@
   <script src="classes.js"></script>
   <script src="init.js"></script>
   <script src="script.js"></script>
-  <script>  
-    if(window.location.href.includes("?eruda=true")) {
-      eruda.init();
-    }
-  </script>
 </body>
 
 </html>

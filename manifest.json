@@ -1,0 +1,13 @@
+{
+  "name": "GD",
+  "short_name": "Geometry Dash",
+  "start_url": ".",
+  "display": "fullscreen",
+  "background_color": "#ffffff",
+  "description": "Game",
+  "icons": [{
+    "src": "icon.jpg",
+    "sizes": "512x512",
+    "type": "image/jpg"
+  }]
+}
