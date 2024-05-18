@@ -94,6 +94,10 @@ function draw() {
           p1.yV = Math.abs(p1.xV);
         }
       }
+      if(level.dead(c1, p1).length > 0) {
+        p1 = new Player(0, 0, 0, 0, 49, 49, 0);
+        c1 = new Camera(0, 0);
+      }
       if(level.coll(c1, p1).length > 0) {
         for(let i = 0; i < 10 && level.coll(c1, p1).length > 0; i++) {
           p1.y -= p1.yV / 10;
@@ -130,5 +134,10 @@ function draw() {
       coy++;
       //Render Stuff
       clear();
+      if(build == "square") {
+        rect(15, 15, tS, tS);
+      } else if(build == "portal") {
+        image(portal(select), 15, 15, tS, tS * 11 / 4)
+      }
       level.render(c1, p1);
 }
