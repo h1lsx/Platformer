@@ -6,7 +6,7 @@
   "background_color": "#ffffff",
   "description": "Game",
   "icons": [{
-    "src": "icon.jpg",
+    "src": "gd.jpg",
     "sizes": "512x512",
     "type": "image/jpg"
   }]
