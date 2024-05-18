@@ -95,8 +95,8 @@ function draw() {
         }
       }
       if(level.dead(c1, p1).length > 0) {
-        p1 = new Player(0, 0, 0, 0, 49, 49, 0);
-        c1 = new Camera(0, 0);
+        p1 = new Player(scrX / 2, scrY / 2, 0, 0, 49, 49, 0);
+        c1 = new Camera(-scrX / 2, -scrY / 2);
       }
       if(level.coll(c1, p1).length > 0) {
         for(let i = 0; i < 10 && level.coll(c1, p1).length > 0; i++) {
