@@ -131,6 +131,10 @@ function draw() {
           p1.yV = gravity * -14.3882403805 / 2;
         }
       }
+      let sp_colls = level.specialcoll(c1, p1);
+      if(sp_colls.includes("cubeportal")) {
+        mode = "cube";
+      }
       coy++;
       //Render Stuff
       clear();

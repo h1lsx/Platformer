@@ -16,13 +16,14 @@ function mousePressed() {
       Math.floor((mouseY + c1.y) / tS) * tS + tS
     )
   }
-  /*sessionStorage.setItem("level", JSON.stringify(level.lvl));
-  sessionStorage.setItem("spike", JSON.stringify(level.spike));*/
+  sessionStorage.setItem("level", JSON.stringify(level.lvl));
+  sessionStorage.setItem("spike", JSON.stringify(level.spike));
+  sessionStorage.setItem("spikeHb", JSON.stringify(level.spikeHb));
 }
 function edit_tick() {
-  /*if(keyIsDown(69)) {
+  if(keyIsDown(69)) {
     window.location.href = JSON.stringify(level);
-  }*/
+  }
   if(keyIsDown(49)) {
    mode = "cube";
   }
@@ -35,12 +36,12 @@ function edit_tick() {
   if(keyIsDown(52)) {
     mode = "wave";
   }
-  /*if(keyIsDown(76)) {
+  if(keyIsDown(76)) {
     const data = JSON.parse(prompt("Level: "));
     level.lvl = data.lvl;
     level.spike = data.spike;
     level.spikeHb = data.spikeHb;
-  }*/
+  }
   if(keyIsDown(82)) {
     location.reload();
   }

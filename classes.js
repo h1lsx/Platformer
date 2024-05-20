@@ -70,10 +70,11 @@ class Camera {
   }
 }
 class Level {
-  constructor(lvl, spike) {
+  constructor(lvl, spike, spikeHb, special) {
     this.lvl = lvl;
     this.spike = spike;
-    this.spikeHb = [];
+    this.spikeHb = spikeHb;
+    this.special = special;
   }
   add(x1, y1, x2, y2) {
     let x = [x1, x2];
@@ -90,10 +91,16 @@ class Level {
     this.spike.push({x1: (x1 + x2) / 2, y1: y[0], x2: x[0], y2: y[1], x3: x[1], y3: y[1]});
     this.spikeHb.push({x1: x[0] + 22/3, x2: x[1] - 22/3, y1: y[0] + 40/3, y2: y[1] - 40/3})
   }
+  addspecial(x, y, type) {
+    this.special.push({x1: x, y1: y, x2: x + specials[type][0], y2: y + specials[type][1], type: type});
+  }
   render(cam, player) {
     player.render();
     this.lvl.forEach(a => {
       rect(a.x1 - cam.x, a.y1 - cam.y, a.x2 - a.x1, a.y2 - a.y1)
+    })
+    this.special.forEach(a => {
+      image(cubeportal, a.x1 - cam.x, a.y1 - cam.y, a.x2 - a.x1, a.y2 - a.y1)
     })
     this.spike.forEach(a => {
       triangle(a.x1 - cam.x, a.y1 - cam.y, a.x2 - cam.x, a.y2 - cam.y, a.x3 - cam.x, a.y3 - cam.y)
@@ -104,5 +111,8 @@ class Level {
   }
   dead(cam, player) {
     return this.spikeHb.filter(a => ClipRect(player.sides(cam), a));
+  }
+  specialcoll(cam, player) {
+    return this.special.filter(a => ClipRect(player.sides(cam), a)).map(a => a.type);
   }
 }
