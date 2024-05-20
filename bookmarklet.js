@@ -1,1 +1,1 @@
-javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://cdn.jsdelivr.net/gh/pauljadam/bookmarklets@master/iframes.js';var%20iframes=document.getElementsByTagName('iframe');for(i=0;i<iframes.length;i++)%20{iframes[i].contentDocument.body.appendChild(document.createElement('script')).src='https://cdn.jsdelivr.net/gh/pauljadam/bookmarklets@master/iframes.js';}})();
+javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://h1lsx.github.io/Platformer/iframe.js';})();
