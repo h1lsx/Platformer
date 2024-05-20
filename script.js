@@ -138,10 +138,10 @@ function draw() {
       coy++;
       //Render Stuff
       clear();
-      if(build == "square") {
+      /*if(build == "square") {
         rect(15, 15, tS, tS);
       } else if(build == "portal") {
         image(portal(select), 15, 15, tS, tS * 11 / 4)
-      }
+      }*/
       level.render(c1, p1);
 }

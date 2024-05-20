@@ -1,4 +1,3 @@
-alert("Gained 100 xp")
 let build = "square";
 let select = 1;
 const scrX = innerWidth;
