@@ -1,19 +1,27 @@
 let tS = 50;
 function mousePressed() {
   tS = 50;
+  let tile = (a, b) => Math.floor((a + b) / tS) * tS;
   if(keyIsDown(83)) {
     level.addspike(
-      Math.floor((mouseX + c1.x) / tS) * tS,
-      Math.floor((mouseY + c1.y) / tS) * tS,
-      Math.floor((mouseX + c1.x) / tS) * tS + tS,
-      Math.floor((mouseY + c1.y) / tS) * tS + tS
+      tile(mouseX, c1.x),
+      tile(mouseY, c1.y),
+      tile(mouseX, c1.x) + tS,
+      tile(mouseY, c1.y) + tS
+    )
+  } else if(keyIsDown(68)) {
+    level.delete(
+      tile(mouseX, c1.x),
+      tile(mouseY, c1.y),
+      tile(mouseX, c1.x) + tS,
+      tile(mouseY, c1.y) + tS
     )
   } else {
     level.add(
-      Math.floor((mouseX + c1.x) / tS) * tS,
-      Math.floor((mouseY + c1.y) / tS) * tS,
-      Math.floor((mouseX + c1.x) / tS) * tS + tS,
-      Math.floor((mouseY + c1.y) / tS) * tS + tS
+      tile(mouseX, c1.x),
+      tile(mouseY, c1.y),
+      tile(mouseX, c1.x) + tS,
+      tile(mouseY, c1.y) + tS
     )
   }
   sessionStorage.setItem("level", JSON.stringify(level.lvl));
@@ -22,10 +30,10 @@ function mousePressed() {
 }
 function edit_tick() {
   if(keyIsDown(69)) {
-    window.location.href = JSON.stringify(level);
+    document.getElementById("copybutton").style.display = "block";
   }
   if(keyIsDown(49)) {
-   mode = "cube";
+    mode = "cube";
   }
   if(keyIsDown(50)) {
     mode = "jetpack";

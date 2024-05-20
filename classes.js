@@ -94,6 +94,17 @@ class Level {
   addspecial(x, y, type) {
     this.special.push({x1: x, y1: y, x2: x + specials[type][0], y2: y + specials[type][1], type: type});
   }
+  delete(x1, y1, x2, y2) {
+    let x = [x1, x2];
+    let y = [y1, y2];
+    x.sort((a, b) => a - b);
+    y.sort((a, b) => a - b);
+    let sB = {x1: x[0] + 1, y1: y[0] + 1, x2: x[1] - 1, y2: y[1] - 1};
+    this.lvl = this.lvl.filter(a => !ClipRect(sB, a))
+    //this.spike = this.spike.filter(a => )
+    this.spikeHb = this.spike.filter(a => !ClipRect(sB, a));
+    this.special = this.special.filter(a => !ClipRect(sB, a))
+  }
   render(cam, player) {
     player.render();
     this.lvl.forEach(a => {
