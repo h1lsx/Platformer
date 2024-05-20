@@ -1,1 +1,0 @@
-javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://h1lsx.github.io/Platformer/iframe.js';})();

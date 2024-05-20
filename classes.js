@@ -101,8 +101,9 @@ class Level {
     y.sort((a, b) => a - b);
     let sB = {x1: x[0] + 1, y1: y[0] + 1, x2: x[1] - 1, y2: y[1] - 1};
     this.lvl = this.lvl.filter(a => !ClipRect(sB, a))
-    //this.spike = this.spike.filter(a => )
-    this.spikeHb = this.spike.filter(a => !ClipRect(sB, a));
+    this.spikeHb = this.spikeHb.map(a => !ClipRect(sB, a));
+    this.spike = this.spike.filter((a, i) => this.spikeHb[i])
+    this.spikeHb = this.spikeHb.filter(a => a)
     this.special = this.special.filter(a => !ClipRect(sB, a))
   }
   render(cam, player) {
