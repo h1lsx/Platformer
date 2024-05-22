@@ -14,7 +14,7 @@
 
 <body>
   <input type="text" id="copyobj" hidden></input>
-  <button onclick="copyToClipboard(JSON.stringify(level)) ? this.style.display='none': this.innerText='Copy Failed!'" id="copybutton" style="display: none;" hidden>Copy</button>
+  <button onclick="copyToClipboard(JSON.stringify(level)) ? this.style.display='none': this.innerText='Copy Failed!'; edit = true;" id="copybutton" style="display: none;" hidden>Copy</button>
   <canvas id="pen"></canvas>
   <img hidden id="tiles" src="tiles.png">
   <script src="edit.js"></script>

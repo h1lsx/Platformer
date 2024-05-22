@@ -141,6 +141,8 @@ function draw() {
       let sp_colls = level.specialcoll(c1, p1);
       if(sp_colls.includes("autoportal")) {
         auto = true;
+      } else if(sp_colls.includes("platformerportal")) {
+        auto = false;
       }
       coy++;
       //Render Stuff

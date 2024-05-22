@@ -112,7 +112,7 @@ class Level {
       rect(a.x1 - cam.x, a.y1 - cam.y, a.x2 - a.x1, a.y2 - a.y1)
     })
     this.special.forEach(a => {
-      image(cubeportal, a.x1 - cam.x, a.y1 - cam.y, a.x2 - a.x1, a.y2 - a.y1)
+      image(portal(a.type), a.x1 - cam.x, a.y1 - cam.y, a.x2 - a.x1, a.y2 - a.y1)
     })
     this.spike.forEach(a => {
       triangle(a.x1 - cam.x, a.y1 - cam.y, a.x2 - cam.x, a.y2 - cam.y, a.x3 - cam.x, a.y3 - cam.y)

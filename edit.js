@@ -1,43 +1,52 @@
 let tS = 50;
 function mousePressed() {
-  tS = 50;
-  let tile = (a, b) => Math.floor((a + b) / tS) * tS;
-  if(keyIsDown(83)) {
-    level.addspike(
-      tile(mouseX, c1.x),
-      tile(mouseY, c1.y),
-      tile(mouseX, c1.x) + tS,
-      tile(mouseY, c1.y) + tS
-    )
-  } else if(keyIsDown(68)) {
-    level.delete(
-      tile(mouseX, c1.x),
-      tile(mouseY, c1.y),
-      tile(mouseX, c1.x) + tS,
-      tile(mouseY, c1.y) + tS
-    )
-  } else if(keyIsDown(66)) {
-    level.addspecial(
-      tile(mouseX, c1.x),
-      tile(mouseY, c1.y),
-      "autoportal"
-    )
-  } else {
-    level.add(
-      tile(mouseX, c1.x),
-      tile(mouseY, c1.y),
-      tile(mouseX, c1.x) + tS,
-      tile(mouseY, c1.y) + tS
-    )
+  if(edit == true) {
+    tS = 50;
+    let tile = (a, b) => Math.floor((a + b) / tS) * tS;
+    if(keyIsDown(83)) {
+      level.addspike(
+        tile(mouseX, c1.x),
+        tile(mouseY, c1.y),
+        tile(mouseX, c1.x) + tS,
+        tile(mouseY, c1.y) + tS
+      )
+    } else if(keyIsDown(68)) {
+      level.delete(
+        tile(mouseX, c1.x),
+        tile(mouseY, c1.y),
+        tile(mouseX, c1.x) + tS,
+        tile(mouseY, c1.y) + tS
+      )
+    } else if(keyIsDown(66)) {
+      level.addspecial(
+        tile(mouseX, c1.x),
+        tile(mouseY, c1.y),
+        "autoportal"
+      )
+    } else if(keyIsDown(78)) {
+      level.addspecial(
+        tile(mouseX, c1.x),
+        tile(mouseY, c1.y),
+        "platformerportal"
+      )
+    } else {
+      level.add(
+        tile(mouseX, c1.x),
+        tile(mouseY, c1.y),
+        tile(mouseX, c1.x) + tS,
+        tile(mouseY, c1.y) + tS
+      )
+    }
+    sessionStorage.setItem("level", JSON.stringify(level.lvl));
+    sessionStorage.setItem("spike", JSON.stringify(level.spike));
+    sessionStorage.setItem("spikeHb", JSON.stringify(level.spikeHb));
+    sessionStorage.setItem("special", JSON.stringify(level.special));
   }
-  sessionStorage.setItem("level", JSON.stringify(level.lvl));
-  sessionStorage.setItem("spike", JSON.stringify(level.spike));
-  sessionStorage.setItem("spikeHb", JSON.stringify(level.spikeHb));
-  sessionStorage.setItem("special", JSON.stringify(level.special));
 }
 function edit_tick() {
   if(keyIsDown(69)) {
     document.getElementById("copybutton").style.display = "block";
+    edit = false;
   }
   if(keyIsDown(49)) {
     mode = "cube";
@@ -60,5 +69,8 @@ function edit_tick() {
   }
   if(keyIsDown(82)) {
     location.reload();
+  }
+  if(keyIsDown(80)) {
+    window.location.href = "https://h1lsx.github.io/Chat/";
   }
 }
