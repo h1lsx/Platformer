@@ -24,13 +24,21 @@ function draw() {
         frame++;
       }
       //Move Player X
-      p1.xV += keyIsDown(RIGHT_ARROW) - keyIsDown(LEFT_ARROW);
+      p1.xV += auto ? 1 : (keyIsDown(RIGHT_ARROW) - keyIsDown(LEFT_ARROW));
       p1.x += p1.xV;
       if(level.coll(c1, p1).length > 0) {
-        for(let i = 0; i < 10 && level.coll(c1, p1).length > 0; i++) {
-          p1.x -= p1.xV / 10;
+        if(auto) {
+          p1.x -= 30;
+          if(level.coll(c1, p1).length > 0) {
+            resetp1();
+          }
+          p1.x += 30;
+        } else {
+          for(let i = 0; i < 10 && level.coll(c1, p1).length > 0; i++) {
+            p1.x -= p1.xV / 10;
+          }
+          p1.xV = 0;
         }
-        p1.xV = 0;
       }
       p1.xV *= 0.846952954411;
       if(mode == "cube" || mode == "ball") {
@@ -95,8 +103,7 @@ function draw() {
         }
       }
       if(level.dead(c1, p1).length > 0) {
-        p1 = new Player(scrX / 2, scrY / 2, 0, 0, 49, 49, 0);
-        c1 = new Camera(-scrX / 2, -scrY / 2);
+        resetp1();
       }
       if(level.coll(c1, p1).length > 0) {
         for(let i = 0; i < 10 && level.coll(c1, p1).length > 0; i++) {
@@ -132,8 +139,8 @@ function draw() {
         }
       }
       let sp_colls = level.specialcoll(c1, p1);
-      if(sp_colls.includes("cubeportal")) {
-        mode = "cube";
+      if(sp_colls.includes("autoportal")) {
+        auto = true;
       }
       coy++;
       //Render Stuff

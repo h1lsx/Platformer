@@ -1,5 +1,9 @@
+if ('serviceWorker' in navigator) {
+   navigator.serviceWorker.register("/sw.js");
+}
 let build = "square";
 let select = 1;
+let auto = false;
 const scrX = innerWidth;
 const scrY = innerHeight;
 let mode = "cube";
@@ -11,7 +15,7 @@ let pImgWave;
 let cubeportal;
 let gravity = 1;
 const specials = {
-  cubeportal: [75, 137.5]
+  autoportal: [75, 137.5]
 };
 /*let pImgl1;
 let pImgl2;
@@ -57,6 +61,13 @@ function preload() {
 let frame = 0;
 const totalframes = 3;
 let warp = 0;
+function resetp1() {
+  p1 = new Player(scrX / 2, scrY / 2, 0, 0, 49, 49, 0);
+  c1 = new Camera(-scrX / 2, -scrY / 2);
+  auto = false;
+  gravity = 1;
+  coy = 7;
+}
 function pimage(v) {
   //if(v == 0) {
     warp = 0;
@@ -150,7 +161,9 @@ if(sessionStorage.getItem("level") == null) {
     JSON.parse(
       sessionStorage.getItem("spikeHb")
     ),
-    []
+    JSON.parse(
+      sessionStorage.getItem("special")
+    )
   )
 }
 let p1 = new Player(0, 0, 0, 0, 49, 49, 0);

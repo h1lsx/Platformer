@@ -89,7 +89,7 @@ class Level {
     x.sort((a, b) => a - b);
     y.sort((a, b) => a - b);
     this.spike.push({x1: (x1 + x2) / 2, y1: y[0], x2: x[0], y2: y[1], x3: x[1], y3: y[1]});
-    this.spikeHb.push({x1: x[0] + 22/3, x2: x[1] - 22/3, y1: y[0] + 40/3, y2: y[1] - 40/3})
+    this.spikeHb.push({x1: x[0] + 18.833, x2: x[1] - 18.833, y1: y[0] + 13.458, y2: y[1] - 13.458})
   }
   addspecial(x, y, type) {
     this.special.push({x1: x, y1: y, x2: x + specials[type][0], y2: y + specials[type][1], type: type});
@@ -117,6 +117,12 @@ class Level {
     this.spike.forEach(a => {
       triangle(a.x1 - cam.x, a.y1 - cam.y, a.x2 - cam.x, a.y2 - cam.y, a.x3 - cam.x, a.y3 - cam.y)
     })
+    /*stroke(255, 0, 0);
+    strokeWeight(4);
+    this.spikeHb.forEach(a => {
+      rect(a.x1 - cam.x, a.y1 - cam.y, a.x2 - a.x1, a.y2 - a.y1)
+    })
+    strokeWeight(0);*/
   }
   coll(cam, player) {
     return this.lvl.filter(a => ClipRect(player.sides(cam), a));
