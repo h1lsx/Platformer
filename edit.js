@@ -3,19 +3,20 @@ function mousePressed() {
   if(edit == true) {
     tS = 50;
     let tile = (a, b) => Math.floor((a + b) / tS) * tS;
-    if(keyIsDown(83)) {
-      level.addspike(
-        tile(mouseX, c1.x),
-        tile(mouseY, c1.y),
-        tile(mouseX, c1.x) + tS,
-        tile(mouseY, c1.y) + tS
-      )
-    } else if(keyIsDown(68)) {
+    if(keyIsDown(68)) {
       level.delete(
         tile(mouseX, c1.x),
         tile(mouseY, c1.y),
         tile(mouseX, c1.x) + tS,
         tile(mouseY, c1.y) + tS
+      )
+    } else if (select == "spike") {
+      level.addspike(
+        tile(mouseX, c1.x),
+        tile(mouseY, c1.y),
+        tile(mouseX, c1.x) + tS,
+        tile(mouseY, c1.y) + tS,
+        keyIsDown(85)
       )
     } else if(select != "square") {
       level.addspecial(
@@ -50,7 +51,7 @@ function edit_tick() {
     //mode = "cube";
   }
   if(keyIsDown(50)) {
-    select = select != "square" ? "shipportal" : "square";
+    select = select != "square" ? "shipportal" : "spike";
     //mode = "jetpack";
   }
   if(keyIsDown(51)) {
@@ -88,7 +89,8 @@ function edit_tick() {
     resetp1();
     if(keyIsDown(81)) {
       if(prompt("Do you want to reset the level? y/n") == "y") {
-          sessionStorage.setItem("level", null);
+          sessionStorage.setItem("level", "reset");
+        location.reload();
       }
     }
   }

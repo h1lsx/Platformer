@@ -106,8 +106,10 @@ function draw() {
         resetp1();
       }
       if(level.coll(c1, p1).length > 0) {
-        for(let i = 0; i < 10 && level.coll(c1, p1).length > 0; i++) {
-          p1.y -= p1.yV / 10;
+        if(true) {
+          for(let i = 0; i < 10 && level.coll(c1, p1).length > 0; i++) {
+            p1.y -= p1.yV / 10;
+          }
         }
         if((p1.yV > 0 && gravity > 0) || (p1.yV < 0 && gravity < 0)) {
           coy = 0;
@@ -157,6 +159,8 @@ function draw() {
       clear();
       if(select == "square") {
         rect(15, 15, tS, tS);
+      } else if(select == "spike") {
+        triangle(15 + tS / 2, 15, 15, tS + 15, tS + 15, tS + 15);
       } else {
         image(portal(select), 15, 15, 75, 137.5)
       }

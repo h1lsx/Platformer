@@ -169,10 +169,10 @@ function setup() {
   noStroke();
 }
 let level;
-if(sessionStorage.getItem("level") == null) {
+if(sessionStorage.getItem("level") == null || sessionStorage.getItem("level") == "reset") {
   level = new Level([], [], [], []);
   //level.addspecial(0, 350, "cubeportal");
-  level.add(0, 500, 500, 700);
+  level.add(0, 50, 500, 250);
 } else {
   level = new Level(
     JSON.parse(
