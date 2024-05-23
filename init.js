@@ -2,8 +2,7 @@ if ('serviceWorker' in navigator) {
    navigator.serviceWorker.register("/sw.js");
 }
 let edit = true;
-let build = "square";
-let select = 1;
+let select = "square";
 let auto = false;
 const scrX = innerWidth;
 const scrY = innerHeight;
@@ -13,12 +12,22 @@ let pImgJetpackr;
 let pImgJetpackl;
 let pImgBall;
 let pImgWave;
+let cubeportal;
+let shipportal;
+let ballportal;
+let waveportal;
 let autoportal;
 let platformerportal;
+let downportal;
+let upportal;
 let gravity = 1;
 const specials = {
   autoportal: [75, 137.5],
-  platformerportal: [75, 137.5]
+  platformerportal: [75, 137.5],
+  ballportal: [75, 137.5],
+  shipportal: [75, 137.5],
+  waveportal: [75, 137.5],
+  cubeportal: [75, 137.5],
 };
 /*let pImgl1;
 let pImgl2;
@@ -45,6 +54,12 @@ function preload() {
   pImgWave = loadImage("gdicons/wave.png");
   autoportal = loadImage("gdicons/autoportal.png");
   platformerportal = loadImage("gdicons/platformerportal.png");
+  cubeportal = loadImage("gdicons/cubeportal.png");
+  shipportal = loadImage("gdicons/shipportal.png");
+  ballportal = loadImage("gdicons/ballportal.png");
+  waveportal = loadImage("gdicons/waveportal.png");
+  upportal = loadImage("gdicons/upportal.png");
+  downportal = loadImage("gdicons/downportal.png");
 /*pImgl1 = loadImage("gdicons/left1.png");
   pImgl2 = loadImage("gdicons/left2.png");
   pImgl3 = loadImage("gdicons/left3.png");
@@ -71,6 +86,7 @@ function resetp1() {
   auto = false;
   gravity = 1;
   coy = 7;
+  mode = "cube";
 }
 function pimage(v) {
   //if(v == 0) {
@@ -140,11 +156,12 @@ function copyToClipboard(string) {
   return true;
 }
 function portal(v) {
-  if(v == "autoportal") {
+  return eval(v)
+  /*if(v == "autoportal") {
     return autoportal;
   } else if(v == "platformerportal") {
     return platformerportal;
-  }
+  }*/
 }
 function setup() {
   createCanvas(scrX, scrY);

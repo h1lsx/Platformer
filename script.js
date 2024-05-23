@@ -1,5 +1,5 @@
 function draw() {
-      edit_tick();
+      //edit_tick();
       scroll(p1, c1, 10);
       //Player Size
       /*if(keyIsDown(DOWN_ARROW)) {
@@ -143,14 +143,22 @@ function draw() {
         auto = true;
       } else if(sp_colls.includes("platformerportal")) {
         auto = false;
+      } else if(sp_colls.includes("shipportal")) {
+        mode = "jetpack";
+      } else if(sp_colls.includes("cubeportal")) {
+        mode = "cube";
+      } else if(sp_colls.includes("ballportal")) {
+        mode = "ball";
+      } else if(sp_colls.includes("waveportal")) {
+        mode = "wave";
       }
       coy++;
       //Render Stuff
       clear();
-      /*if(build == "square") {
+      if(select == "square") {
         rect(15, 15, tS, tS);
-      } else if(build == "portal") {
-        image(portal(select), 15, 15, tS, tS * 11 / 4)
-      }*/
+      } else {
+        image(portal(select), 15, 15, 75, 137.5)
+      }
       level.render(c1, p1);
 }
