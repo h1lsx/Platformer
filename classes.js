@@ -70,11 +70,12 @@ class Camera {
   }
 }
 class Level {
-  constructor(lvl, spike, spikeHb, special) {
+  constructor(lvl, spike, spikeHb, special, coin) {
     this.lvl = lvl;
     this.spike = spike;
     this.spikeHb = spikeHb;
     this.special = special;
+    this.coin = coin;
   }
   add(x1, y1, x2, y2) {
     let x = [x1, x2];
@@ -94,6 +95,11 @@ class Level {
   addspecial(x, y, type) {
     this.special.push({x1: x, y1: y, x2: x + specials[type][0], y2: y + specials[type][1], type: type});
   }
+  addcoin(x, y) {
+    if(this.coin.length < 3) {
+      this.coin.push({coinimg: "coin", x1: x - 4, y1: y - 4, x2: x + 50 + 4, y2: y + 50 + 4, frame: 0.001})
+    }
+  }
   delete(x1, y1, x2, y2) {
     let x = [x1, x2];
     let y = [y1, y2];
@@ -105,6 +111,7 @@ class Level {
     this.spike = this.spike.filter((a, i) => spikedelete[i]);
     this.spikeHb = this.spikeHb.filter((a, i) => spikedelete[i]);
     this.special = this.special.filter(a => !ClipRect(sB, a));
+    this.coin = this.coin.filter(a => !ClipRect(sB, a));
   }
   render(cam, player) {
     player.render();
@@ -113,6 +120,16 @@ class Level {
     })
     this.special.forEach(a => {
       image(portal(a.type), a.x1 - cam.x, a.y1 - cam.y, a.x2 - a.x1, a.y2 - a.y1)
+    })
+    this.coin.forEach(a => {
+      if(a.frame < 164) {
+        const off = a.frame == 0.001 ? 0 : a.frame * a.frame / 4 - 64
+        image(a.coinimg == "coin" ? coin : colcoin, a.x1 - cam.x, a.y1 - cam.y + off, a.x2 - a.x1, a.y2 - a.y1)
+        console.log(a.coinimg)
+        if(a.frame != 0.001) {
+          a.frame++;
+        }
+      }
     })
     this.spike.forEach(a => {
       triangle(a.x1 - cam.x, a.y1 - cam.y, a.x2 - cam.x, a.y2 - cam.y, a.x3 - cam.x, a.y3 - cam.y)
@@ -132,5 +149,15 @@ class Level {
   }
   specialcoll(cam, player) {
     return this.special.filter(a => ClipRect(player.sides(cam), a)).map(a => a.type);
+  }
+  coincoll(cam, player) {
+    this.coin.forEach(a => {
+      if(ClipRect(player.sides(cam), a)) {
+        if(a.frame == 0.001) {
+          a.coinimg = "colcoin";
+          a.frame = -16;
+        }
+      }
+    })
   }
 }

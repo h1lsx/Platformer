@@ -27,6 +27,9 @@ function draw() {
       p1.xV += auto ? 1 : (keyIsDown(RIGHT_ARROW) - keyIsDown(LEFT_ARROW));
       p1.x += p1.xV;
       if(level.coll(c1, p1).length > 0) {
+        if(mode == "wave") {
+          resetp1();
+        }
         if(auto) {
           p1.x -= 30;
           if(level.coll(c1, p1).length > 0) {
@@ -40,9 +43,9 @@ function draw() {
           p1.xV = 0;
         }
       }
-      p1.xV *= 0.846952954411;
+      p1.xV *= speeds[p1speed][0];
       if(mode == "cube" || mode == "ball") {
-        p1.rot += gravity * p1.xV * 10 / 17 * 4 / 3;
+        p1.rot += gravity * p1.xV * 10 / 17 * 4 / 3 / speeds[p1speed][1];
       } else {
         p1.rot = 0;
       }
@@ -106,6 +109,9 @@ function draw() {
         resetp1();
       }
       if(level.coll(c1, p1).length > 0) {
+        if(mode == "wave") {
+          resetp1();
+        }
         if(true) {
           for(let i = 0; i < 10 && level.coll(c1, p1).length > 0; i++) {
             p1.y -= p1.yV / 10;
@@ -141,6 +147,14 @@ function draw() {
         }
       }
       let sp_colls = level.specialcoll(c1, p1);
+      if(sp_colls.includes("coin")) {
+        level.delete(p1.x + c1.x, p1.y + c1.y, p1.x + c1.x + 50, p1.y + c1.y + 50)
+      }
+      if(sp_colls.includes("downportal")) {
+        gravity = 1;
+      } else if(sp_colls.includes("upportal")) {
+        gravity = -1;
+      }
       if(sp_colls.includes("autoportal")) {
         auto = true;
       } else if(sp_colls.includes("platformerportal")) {
@@ -157,10 +171,13 @@ function draw() {
       coy++;
       //Render Stuff
       clear();
+      level.coincoll(c1, p1);
       if(select == "square") {
         rect(15, 15, tS, tS);
       } else if(select == "spike") {
         triangle(15 + tS / 2, 15, 15, tS + 15, tS + 15, tS + 15);
+      } else if(select == "coin") {
+        image(coin, 15, 15, tS + 8, tS + 8);
       } else {
         image(portal(select), 15, 15, 75, 137.5)
       }

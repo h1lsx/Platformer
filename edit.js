@@ -1,7 +1,10 @@
 let tS = 50;
+function mouseReleased() {
+  edit = true;
+}
 function mousePressed() {
   if(edit == true) {
-    tS = 50;
+    edit = false;
     let tile = (a, b) => Math.floor((a + b) / tS) * tS;
     if(keyIsDown(68)) {
       level.delete(
@@ -17,6 +20,11 @@ function mousePressed() {
         tile(mouseX, c1.x) + tS,
         tile(mouseY, c1.y) + tS,
         keyIsDown(85)
+      )
+    } else if(select == "coin") {
+      level.addcoin(
+        tile(mouseX, c1.x),
+        tile(mouseY, c1.y)
       )
     } else if(select != "square") {
       level.addspecial(
@@ -36,6 +44,7 @@ function mousePressed() {
     sessionStorage.setItem("spike", JSON.stringify(level.spike));
     sessionStorage.setItem("spikeHb", JSON.stringify(level.spikeHb));
     sessionStorage.setItem("special", JSON.stringify(level.special));
+    sessionStorage.setItem("coin", JSON.stringify(level.coin));
   }
 }
 function keyPressed() {
@@ -55,7 +64,7 @@ function edit_tick() {
     //mode = "jetpack";
   }
   if(keyIsDown(51)) {
-    select = select != "square" ? "ballportal" : "square";
+    select = select != "square" ? "ballportal" : "coin";
     //mode = "ball";
   }
   if(keyIsDown(52)) {
@@ -84,6 +93,7 @@ function edit_tick() {
     level.spike = data.spike;
     level.spikeHb = data.spikeHb;
     level.special = data.special;
+    level.coin = data.coin;
   }
   if(keyIsDown(82)) {
     resetp1();

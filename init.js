@@ -7,6 +7,14 @@ let auto = false;
 const scrX = innerWidth;
 const scrY = innerHeight;
 let mode = "cube";
+let p1speed = 4;
+const speeds = [
+  [0.816951748787, 0.80648535564],
+  [0.846952954411, 1],
+  [0.87312414734, 1.2435483871],
+  [0.892670339633, 1.5029239766],
+  [0.910967190947, 1.8489208633]
+]
 let pImgIdle;
 let pImgJetpackr;
 let pImgJetpackl;
@@ -20,6 +28,8 @@ let autoportal;
 let platformerportal;
 let downportal;
 let upportal;
+let coin;
+let colcoin;
 let gravity = 1;
 const specials = {
   autoportal: [75, 137.5],
@@ -28,6 +38,9 @@ const specials = {
   shipportal: [75, 137.5],
   waveportal: [75, 137.5],
   cubeportal: [75, 137.5],
+  downportal: [75, 137.5],
+  upportal: [75, 137.5],
+  coin: [50, 50]
 };
 /*let pImgl1;
 let pImgl2;
@@ -60,6 +73,8 @@ function preload() {
   waveportal = loadImage("gdicons/waveportal.png");
   upportal = loadImage("gdicons/upportal.png");
   downportal = loadImage("gdicons/downportal.png");
+  coin = loadImage("gdicons/coin.png");
+  colcoin = loadImage("gdicons/colcoin.png");
 /*pImgl1 = loadImage("gdicons/left1.png");
   pImgl2 = loadImage("gdicons/left2.png");
   pImgl3 = loadImage("gdicons/left3.png");
@@ -81,6 +96,11 @@ let frame = 0;
 const totalframes = 3;
 let warp = 0;
 function resetp1() {
+  level.coin.forEach(a => {
+    a.frame = 0.001;
+    a.coin = "coin";
+    console.log(a.coin)
+  })
   p1 = new Player(scrX / 2, scrY / 2, 0, 0, 49, 49, 0);
   c1 = new Camera(-scrX / 2, -scrY / 2);
   auto = false;
@@ -170,7 +190,7 @@ function setup() {
 }
 let level;
 if(sessionStorage.getItem("level") == null || sessionStorage.getItem("level") == "reset") {
-  level = new Level([], [], [], []);
+  level = new Level([], [], [], [], []);
   //level.addspecial(0, 350, "cubeportal");
   level.add(0, 50, 500, 250);
 } else {
@@ -186,8 +206,15 @@ if(sessionStorage.getItem("level") == null || sessionStorage.getItem("level") ==
     ),
     JSON.parse(
       sessionStorage.getItem("special")
+    ),
+    JSON.parse(
+      sessionStorage.getItem("coin")
     )
   )
+  level.coin.forEach(a => {
+    a.frame = 0.001;
+    a.coin = "coin";
+  })
 }
 let p1 = new Player(0, 0, 0, 0, 49, 49, 0);
 let c1 = new Camera(0, 0);
