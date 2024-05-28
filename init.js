@@ -7,7 +7,7 @@ let auto = false;
 const scrX = innerWidth;
 const scrY = innerHeight;
 let mode = "cube";
-let p1speed = 4;
+let p1speed = 1;
 const speeds = [
   [0.816951748787, 0.80648535564],
   [0.846952954411, 1],
