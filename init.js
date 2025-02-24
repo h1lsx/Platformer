@@ -66,6 +66,7 @@ let pImgr7;
 let pImgr8;*/
 let jumpX = 0;
 function preload() {
+  pixelDensity(window.devicePixelRatio);
   pImgIdle = loadImage("gdicons/icon.png");
   pImgJetpackr = loadImage("gdicons/jetpackr.png");
   pImgJetpackl = loadImage("gdicons/jetpackl.png");
